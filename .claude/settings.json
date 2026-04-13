@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --use-npm --no-turbopack --yes)",
+      "Bash(mv \"c:/Users/lucas/Desktop/VibeCoding/lucasmoraca.com/claudeCode.md\" \"c:/Users/lucas/Desktop/VibeCoding/lucasmoraca.com/../claudeCode.md.bak\")",
+      "Bash(mv \"c:/Users/lucas/Desktop/VibeCoding/lucasmoraca.com/spec.md\" \"c:/Users/lucas/Desktop/VibeCoding/lucasmoraca.com/../spec.md.bak\")"
+    ]
+  }
+}
