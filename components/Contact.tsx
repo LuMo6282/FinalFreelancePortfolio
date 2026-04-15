@@ -23,15 +23,21 @@ export default function Contact() {
     setErrorMessage(null);
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formspree.io/f/mojpqelr", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({ name, email, message }),
       });
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error ?? "Failed to send");
+        const firstError = Array.isArray(data?.errors)
+          ? data.errors[0]?.message
+          : undefined;
+        throw new Error(firstError ?? "Failed to send");
       }
 
       setState("success");

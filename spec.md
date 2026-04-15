@@ -181,7 +181,7 @@ I take on 2–3 projects at a time.
 - Project Details (textarea)
 - Submit button: "Send it →"
 
-**Form backend:** Resend + Next.js API route. Sends submissions to `lucasmoraca@gmail.com`.
+**Form backend:** Formspree (`https://formspree.io/f/mojpqelr`). Client POSTs JSON directly.
 
 **Styling:** Inputs with rounded corners, subtle border, generous padding. Button matches accent color.
 
@@ -289,7 +289,6 @@ Anchor IDs:
 /app
   /layout.tsx          — Root layout with fonts, metadata, theme provider
   /page.tsx            — Single page composing all sections
-  /api/contact/route.ts — Contact form API endpoint (Resend)
 /components
   /Nav.tsx             — Floating pill navigation
   /Hero.tsx            — Hero section
