@@ -34,6 +34,23 @@ export default function ProjectCard({
   className = "",
   index = 0,
 }: ProjectCardProps) {
+  const handleMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty(
+      "--glow-x",
+      `${e.clientX - rect.left}px`,
+    );
+    e.currentTarget.style.setProperty(
+      "--glow-y",
+      `${e.clientY - rect.top}px`,
+    );
+    e.currentTarget.style.setProperty("--glow-opacity", "1");
+  };
+
+  const handleLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.setProperty("--glow-opacity", "0");
+  };
+
   return (
     <motion.a
       href={href}
@@ -44,7 +61,9 @@ export default function ProjectCard({
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: index * 0.1, ease }}
       whileHover={{ y: -4 }}
-      className={`group relative flex flex-col overflow-hidden rounded-card border border-edge bg-surface p-7 text-primary shadow-[0_8px_30px_-16px_rgba(0,0,0,0.5)] transition-[border-color,background-color,box-shadow] duration-300 hover:border-accent hover:bg-surface-hover hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.6)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none sm:p-9 ${className}`}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className={`card-foil-glow group relative flex cursor-pointer flex-col overflow-hidden rounded-card border border-edge bg-surface p-7 text-primary shadow-[0_8px_30px_-16px_rgba(0,0,0,0.5)] transition-[border-color,background-color,box-shadow] duration-300 hover:border-accent hover:bg-surface-hover hover:shadow-[0_30px_80px_-20px_rgba(201,168,76,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none sm:p-9 ${className}`}
     >
       <div className="flex flex-col">
         <span className="font-display text-[10px] font-light uppercase tracking-[0.22em] text-secondary sm:text-[11px]">

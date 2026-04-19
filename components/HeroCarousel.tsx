@@ -57,26 +57,55 @@ export default function HeroCarousel() {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredDot, setHoveredDot] = useState<number | null>(null);
   const [visitCounts, setVisitCounts] = useState<Record<string, number>>({});
-  const prevIndexRef = useRef(currentIndex);
+  const [showHint, setShowHint] = useState(false);
+  const interactedRef = useRef(false);
 
   const currentProject = PROJECTS[currentIndex];
 
-  const goTo = useCallback((i: number) => {
-    setCurrentIndex(i);
+  useEffect(() => {
+    const show = () => setShowHint(true);
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(pointer: coarse)").matches) return;
+    try {
+      if (localStorage.getItem("carousel-hinted") !== "true") show();
+    } catch {
+      show();
+    }
   }, []);
+
+  const dismissHint = useCallback(() => {
+    if (interactedRef.current) return;
+    interactedRef.current = true;
+    setShowHint(false);
+    try {
+      localStorage.setItem("carousel-hinted", "true");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const goTo = useCallback(
+    (i: number) => {
+      dismissHint();
+      setCurrentIndex((prev) => {
+        if (i !== prev) {
+          const id = PROJECTS[i].id;
+          setVisitCounts((v) => ({ ...v, [id]: (v[id] ?? 0) + 1 }));
+        }
+        return i;
+      });
+    },
+    [dismissHint],
+  );
 
   const advance = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
-  }, []);
-
-  useEffect(() => {
-    const prev = prevIndexRef.current;
-    if (prev !== currentIndex) {
-      const id = PROJECTS[currentIndex].id;
+    setCurrentIndex((prev) => {
+      const next = (prev + 1) % PROJECTS.length;
+      const id = PROJECTS[next].id;
       setVisitCounts((v) => ({ ...v, [id]: (v[id] ?? 0) + 1 }));
-    }
-    prevIndexRef.current = currentIndex;
-  }, [currentIndex]);
+      return next;
+    });
+  }, []);
 
   return (
     <motion.div
@@ -165,7 +194,7 @@ export default function HeroCarousel() {
         </div>
       </a>
 
-      <div className="mt-6 flex items-center justify-center gap-3">
+      <div className="mt-4 flex items-center justify-center gap-1">
         {PROJECTS.map((p, i) => {
           const isActive = i === currentIndex;
           const isHovered = hoveredDot === i;
@@ -178,18 +207,20 @@ export default function HeroCarousel() {
                 onMouseLeave={() => setHoveredDot(null)}
                 aria-label={`Show ${p.name}`}
                 aria-current={isActive ? "true" : undefined}
-                className="relative block h-1.5 w-10 overflow-hidden rounded-full bg-edge transition-colors hover:bg-accent/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
+                className="group relative block cursor-pointer px-1.5 py-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
               >
-                {isActive && (
-                  <div
-                    className="absolute inset-0 origin-left bg-accent"
-                    style={{
-                      animation: `carousel-fill ${SLIDE_DURATION_SECONDS}s linear forwards`,
-                      animationPlayState: isPaused ? "paused" : "running",
-                    }}
-                    onAnimationEnd={advance}
-                  />
-                )}
+                <span className="relative block h-1.5 w-10 overflow-hidden rounded-full bg-edge transition-colors group-hover:bg-accent/40">
+                  {isActive && (
+                    <span
+                      className="absolute inset-0 block origin-left bg-accent"
+                      style={{
+                        animation: `carousel-fill ${SLIDE_DURATION_SECONDS}s linear forwards`,
+                        animationPlayState: isPaused ? "paused" : "running",
+                      }}
+                      onAnimationEnd={advance}
+                    />
+                  )}
+                </span>
               </button>
               <AnimatePresence>
                 {isHovered && (
@@ -198,7 +229,7 @@ export default function HeroCarousel() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
                     transition={{ duration: 0.2 }}
-                    className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] text-secondary"
+                    className="pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] text-secondary"
                   >
                     {p.name}
                   </motion.span>
@@ -208,6 +239,21 @@ export default function HeroCarousel() {
           );
         })}
       </div>
+
+      <AnimatePresence>
+        {showHint && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 0.5, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, delay: 0.6 }}
+            className="mt-1 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-secondary md:hidden"
+            aria-hidden="true"
+          >
+            Tap to browse
+          </motion.p>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

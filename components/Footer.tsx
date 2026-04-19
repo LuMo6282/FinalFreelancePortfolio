@@ -1,21 +1,8 @@
+import FooterWaveform from "./FooterWaveform";
 import ThemeToggle from "./ThemeToggle";
 
-const WAVEFORM = Array.from({ length: 80 }, (_, i) => {
-  const h = Math.round(
-    6 + Math.abs(Math.sin(i * 0.43)) * 28 + Math.abs(Math.cos(i * 0.91)) * 10,
-  );
-  const opacity = 0.25 + Math.abs(Math.sin(i * 0.27 + 0.5)) * 0.45;
-  return { h, opacity };
-});
-
-const COLS = WAVEFORM.length;
-const VB_WIDTH = 1200;
-const VB_HEIGHT = 60;
-const SLOT = VB_WIDTH / COLS;
-const BAR_WIDTH = SLOT * 0.5;
-
 const linkClass =
-  "rounded-sm font-display text-sm font-light text-primary transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none";
+  "inline-flex min-h-11 min-w-11 cursor-pointer items-center rounded-sm font-display text-sm font-light text-primary transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none";
 
 const labelClass =
   "mb-4 font-display text-[11px] font-light uppercase tracking-[0.22em] text-accent";
@@ -35,17 +22,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={linkClass}
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
+                    href="https://linkedin.com/in/lucasmoraca"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={linkClass}
@@ -63,6 +40,14 @@ export default function Footer() {
                     Message
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="mailto:lucasmoraca12@gmail.com"
+                    className={linkClass}
+                  >
+                    Email
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -77,30 +62,16 @@ export default function Footer() {
             className="font-mono text-sm text-secondary"
             aria-hidden="true"
           >
-            [LM]
+            <span className="opacity-60">[</span>
+            <span className="tracking-tight text-primary/80">LM</span>
+            <span className="opacity-60">]</span>
+            <span className="ml-0.5 text-accent">·</span>
           </span>
         </div>
       </div>
 
-      <div className="w-full text-accent">
-        <svg
-          viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
-          className="block h-10 w-full sm:h-14"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          {WAVEFORM.map(({ h, opacity }, i) => (
-            <rect
-              key={i}
-              x={i * SLOT + (SLOT - BAR_WIDTH) / 2}
-              y={VB_HEIGHT - h}
-              width={BAR_WIDTH}
-              height={h}
-              fill="currentColor"
-              opacity={opacity}
-            />
-          ))}
-        </svg>
+      <div className="w-full">
+        <FooterWaveform />
       </div>
     </footer>
   );

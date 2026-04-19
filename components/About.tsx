@@ -18,7 +18,7 @@ export default function About() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease }}
-          className="w-full max-w-2xs lg:sticky lg:top-28"
+          className="w-full max-w-sm lg:sticky lg:top-28"
         >
           <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full bg-surface shadow-[16px_16px_0_0_rgba(255,255,255,0.95)] dark:shadow-[16px_16px_0_0_rgba(0,0,0,0.75)]">
             {PHOTO_SRC ? (
@@ -46,18 +46,25 @@ export default function About() {
           <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
             About
           </p>
-          <h2 className="mt-3 font-display text-5xl font-extrabold leading-none tracking-tight text-primary sm:text-[52px] md:text-[56px]">
-            Lucas <span className="text-accent">Moraca</span>
+          <h2 className="mt-4 font-serif text-5xl italic leading-[1.02] tracking-tight text-primary sm:text-[56px] md:text-[64px]">
+            About the builder.
           </h2>
           <p className="mt-3 font-display text-base font-light text-secondary">
             Boulder, CO
           </p>
 
-          <div className="mt-8 h-px w-12 bg-accent" aria-hidden="true" />
+          <div className="mt-8 h-px w-12 gold-foil-divider" aria-hidden="true" />
 
           <div className="mt-8 max-w-xl font-display text-base font-light leading-relaxed text-secondary sm:text-[17px]">
             <p>
-              I&apos;m a developer and designer based out of Boulder. I build
+              <span
+                aria-hidden="true"
+                className="float-left mt-1 mr-3 font-serif text-6xl leading-[0.85] text-accent italic sm:text-7xl"
+              >
+                I
+              </span>
+              <span className="sr-only">I</span>
+              {" "}am a developer and designer based out of Boulder. I build
               websites, apps, and digital products for small businesses and
               personal brands. I put together everything from the design to the
               code &amp; deployment. I have a real passion for clean aesthetics
@@ -69,7 +76,15 @@ export default function About() {
           </div>
 
           <div className="mt-8 max-w-xl space-y-8">
-            <div className="border-l-[3px] border-[#c1121f] pl-5 dark:border-[#e63946]">
+            <div className="relative pl-5">
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 bottom-0 w-0.75 rounded-full"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(180deg, rgba(193,18,31,0.2) 0%, #e63946 40%, #c1121f 60%, rgba(193,18,31,0.2) 100%)",
+                }}
+              />
               <div className="flex items-center gap-2.5">
                 <span
                   aria-hidden="true"
@@ -95,9 +110,13 @@ export default function About() {
               </p>
             </div>
 
-            <div className="border-l-[3px] border-accent pl-5">
+            <div className="relative pl-5">
+              <span
+                aria-hidden
+                className="absolute left-0 top-0 bottom-0 w-0.75 rounded-full gold-foil-border-vertical"
+              />
               <div className="leading-none">
-                <p className="font-display text-[24px] font-extrabold tracking-[0.01em] text-[#c9a84c]">
+                <p className="gold-foil font-display text-[24px] font-extrabold tracking-[0.01em]">
                   CHAPTERMADE
                 </p>
                 <p className="mt-1.5 font-display text-[12px] font-light uppercase tracking-[0.28em] text-secondary">
@@ -132,22 +151,12 @@ export default function About() {
             </li>
             <li>
               <a
-                href="#"
+                href="https://linkedin.com/in/lucasmoraca"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={linkClass}
               >
                 LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                GitHub
               </a>
             </li>
           </ul>

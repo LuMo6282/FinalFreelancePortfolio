@@ -4,46 +4,61 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLogoEasterEgg } from "./LogoEasterEgg";
 import ThemeToggle from "./ThemeToggle";
 
 type NavItem = {
   href: string;
   label: string;
-  match: (pathname: string) => boolean;
+  match: (pathname: string, hash: string) => boolean;
 };
 
 const items: NavItem[] = [
   {
     href: "/",
     label: "Work",
-    match: (p) => p === "/",
+    match: (p, h) => p === "/" && h !== "#contact",
   },
   {
     href: "/about",
     label: "About",
-    match: (p) => p.startsWith("/about"),
+    match: (p, h) => p.startsWith("/about") && h !== "#contact",
   },
   {
     href: "/about#contact",
     label: "Contact",
-    match: () => false,
+    match: (_p, h) => h === "#contact",
   },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
-  const [isPastHero, setIsPastHero] = useState(false);
+  const isHomePage = pathname === "/";
+  const [scrolledPast, setScrolledPast] = useState(false);
+  const [hash, setHash] = useState("");
+  const { onLogoClick, overlay: logoEggOverlay } = useLogoEasterEgg();
+  const isPastHero = !isHomePage || scrolledPast;
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setIsPastHero(true);
-      return;
-    }
+    const syncHash = () => {
+      setHash(window.location.hash);
+    };
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    window.addEventListener("popstate", syncHash);
+    return () => {
+      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("popstate", syncHash);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isHomePage) return;
 
     const onScroll = () => {
       const y = window.scrollY;
       const threshold = Math.max(window.innerHeight * 0.6, 400);
-      setIsPastHero(y > threshold);
+      setScrolledPast(y > threshold);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -52,9 +67,10 @@ export default function Nav() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [pathname]);
+  }, [isHomePage]);
 
   const handleLogoClick = () => {
+    onLogoClick();
     if (pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -67,17 +83,24 @@ export default function Nav() {
           type="button"
           onClick={handleLogoClick}
           aria-label="Scroll to top"
-          className="fixed top-5 left-6 z-50 hidden font-mono text-base text-primary transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none md:block"
+          className="group fixed top-5 left-6 z-50 cursor-pointer font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
-          [LM]
+          <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
+          <span className="tracking-tight">LM</span>
+          <span className="text-secondary/70 transition-colors group-hover:text-secondary">]</span>
+          <span aria-hidden="true" className="ml-0.5 text-accent">·</span>
         </button>
       ) : (
         <Link
           href="/"
+          onClick={onLogoClick}
           aria-label="Home"
-          className="fixed top-5 left-6 z-50 hidden font-mono text-base text-primary transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none md:block"
+          className="group fixed top-5 left-6 z-50 font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
-          [LM]
+          <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
+          <span className="tracking-tight">LM</span>
+          <span className="text-secondary/70 transition-colors group-hover:text-secondary">]</span>
+          <span aria-hidden="true" className="ml-0.5 text-accent">·</span>
         </Link>
       )}
 
@@ -93,7 +116,7 @@ export default function Nav() {
           }`}
         >
           {items.map((item) => {
-            const isActive = item.match(pathname);
+            const isActive = item.match(pathname, hash);
             const showActive = isActive && isPastHero;
             return (
               <Link
@@ -124,6 +147,7 @@ export default function Nav() {
           <ThemeToggle />
         </div>
       </nav>
+      {logoEggOverlay}
     </>
   );
 }

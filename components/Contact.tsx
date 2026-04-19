@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import MagneticButton from "./MagneticButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -72,13 +73,16 @@ export default function Contact() {
             Tell me about your project. I respond within 24 hours.
           </p>
 
-          <div className="mt-8 h-px w-12 bg-accent" aria-hidden="true" />
+          <div
+            className="mt-8 h-px w-12 gold-foil-divider"
+            aria-hidden="true"
+          />
 
           <p className="mt-8 max-w-sm font-display text-sm font-light leading-relaxed text-secondary">
             Prefer email? Reach me directly at{" "}
             <a
               href="mailto:lucasmoraca12@gmail.com"
-              className="text-accent transition-opacity hover:opacity-70"
+              className="inline-flex min-h-11 cursor-pointer items-center text-accent transition-opacity hover:opacity-70"
             >
               lucasmoraca12@gmail.com
             </a>
@@ -148,19 +152,21 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button
-              type="submit"
-              disabled={state === "loading"}
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-body transition-colors hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {state === "loading" ? "Sending…" : "Send it"}
-              <span
-                aria-hidden="true"
-                className="transition-transform group-hover:translate-x-0.5"
+            <MagneticButton>
+              <button
+                type="submit"
+                disabled={state === "loading"}
+                className="btn-foil-hover group inline-flex cursor-pointer items-center gap-2 rounded-full px-7 py-3 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-body shadow-[0_0_30px_-8px_rgba(201,168,76,0.5)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60"
               >
-                →
-              </span>
-            </button>
+                {state === "loading" ? "Sending…" : "Send it"}
+                <span
+                  aria-hidden="true"
+                  className="transition-transform group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
+              </button>
+            </MagneticButton>
 
             {state === "success" && (
               <p
