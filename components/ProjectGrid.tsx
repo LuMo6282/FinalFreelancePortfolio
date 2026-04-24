@@ -22,7 +22,7 @@ export default function ProjectGrid() {
               Selected Work
             </p>
             <h2 className="mt-3 max-w-xl font-serif text-3xl italic leading-[1.05] tracking-tight text-primary sm:text-4xl md:text-[44px]">
-              Six years of shipping for founders,
+              Six years of building for founders,
               <br className="hidden sm:block" /> studios, and small teams.
             </h2>
           </div>

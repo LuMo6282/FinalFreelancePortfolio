@@ -113,7 +113,7 @@ export default function Hero() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.9, ease }}
             >
-              Boulder, CO &middot; 3 products shipped &middot; Available for new projects
+              Boulder, CO &middot; Available for new projects
             </motion.p>
           </div>
 
