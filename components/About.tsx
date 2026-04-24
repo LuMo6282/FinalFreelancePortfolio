@@ -18,9 +18,9 @@ export default function About() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease }}
-          className="mx-auto w-full max-w-[200px] sm:max-w-sm lg:sticky lg:top-28 lg:mx-0"
+          className="mx-auto w-full max-w-70 sm:max-w-sm lg:sticky lg:top-28 lg:mx-0"
         >
-          <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full bg-surface sm:shadow-[16px_16px_0_0_rgba(255,255,255,0.95)] sm:dark:shadow-[16px_16px_0_0_rgba(0,0,0,0.75)]">
+          <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full bg-surface shadow-[8px_8px_0_0_rgba(107,101,92,0.18)] dark:shadow-[8px_8px_0_0_rgba(0,0,0,0.75)] sm:shadow-[16px_16px_0_0_rgba(107,101,92,0.22)] sm:dark:shadow-[16px_16px_0_0_rgba(0,0,0,0.75)]">
             {PHOTO_SRC ? (
               <Image
                 src={PHOTO_SRC}
