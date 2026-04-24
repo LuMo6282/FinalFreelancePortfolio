@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export type ProjectCardProps = {
   label: string;
@@ -15,8 +16,11 @@ export type ProjectCardProps = {
     | "browser"
     | "phone"
     | "redline-composite"
-    | "lilo-strip";
+    | "lilo-strip"
+    | "iframe";
   screenshot?: string;
+  iframeSrc?: string;
+  iframeDomain?: string;
   isPlaceholder?: boolean;
   className?: string;
   index?: number;
@@ -34,6 +38,8 @@ export default function ProjectCard({
   external,
   frameType = "browser",
   screenshot,
+  iframeSrc,
+  iframeDomain,
   isPlaceholder,
   className = "",
   index = 0,
@@ -94,6 +100,8 @@ export default function ProjectCard({
       <div className="mt-8 flex flex-1 items-end">
         {isPlaceholder ? (
           <PlaceholderArrow />
+        ) : frameType === "iframe" && iframeSrc ? (
+          <IframeFrame src={iframeSrc} domain={iframeDomain} title={title} />
         ) : frameType === "redline-composite" ? (
           <RedlineComposite />
         ) : frameType === "lilo-strip" ? (
@@ -105,6 +113,66 @@ export default function ProjectCard({
         )}
       </div>
     </motion.a>
+  );
+}
+
+const IFRAME_BASE_WIDTH = 1440;
+const IFRAME_BASE_HEIGHT = 900;
+
+function IframeFrame({
+  src,
+  domain,
+  title,
+}: {
+  src: string;
+  domain?: string;
+  title: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.5);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      if (w > 0) setScale(w / IFRAME_BASE_WIDTH);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div className="w-full overflow-hidden rounded-2xl border border-edge bg-body/40">
+      <div className="relative flex items-center gap-1.5 border-b border-edge px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28c841]" />
+        {domain && (
+          <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 truncate font-mono text-[10px] text-secondary">
+            {domain}
+          </span>
+        )}
+      </div>
+      <div ref={ref} className="relative aspect-16/10 overflow-hidden">
+        <iframe
+          src={src}
+          title={`${title} live preview`}
+          loading="lazy"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{
+            width: IFRAME_BASE_WIDTH,
+            height: IFRAME_BASE_HEIGHT,
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+          }}
+          className="pointer-events-none absolute left-0 top-0 block border-0"
+        />
+      </div>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import ProjectCard from "./ProjectCard";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const stats = [
-  { value: "15+", label: "Sites & products shipped" },
+  { value: "5+", label: "Sites & products shipped" },
   { value: "2,200+", label: "Members served across live apps" },
   { value: "3", label: "Businesses founded & built" },
   { value: "100%", label: "On-time delivery rate" },
@@ -42,7 +42,9 @@ export default function ProjectGrid() {
             description="End-to-end composite platform for Greek life. Photographers upload shoots to the portal, members log in to purchase individual portraits, executives customize the composite layout, and finished designs ship straight to the framer."
             href="https://chaptermadecomposites.vercel.app/"
             external
-            screenshot="/assets/flatirons.jpg"
+            frameType="iframe"
+            iframeSrc="https://chaptermadecomposites.vercel.app/"
+            iframeDomain="chaptermadecomposites.vercel.app"
           />
 
           <ProjectCard
@@ -54,7 +56,9 @@ export default function ProjectGrid() {
             description="Programmed AI training advisor for athletes. Reads readiness signals, session history, and goals, then adapts each workout recommendation in real time as you log and recover. Currently in beta testing."
             href="https://redline-website-vercel.vercel.app/"
             external
-            frameType="redline-composite"
+            frameType="iframe"
+            iframeSrc="https://redline-website-vercel.vercel.app/"
+            iframeDomain="redline-app.com"
           />
 
           <ProjectCard
@@ -66,7 +70,9 @@ export default function ProjectGrid() {
             description="Wholesale storefront for women's premium branded fitness attire. Boutique buyers browse collections and submit custom quote requests, while a bespoke admin dashboard lets the owner field responses and manage every photo, product, and collection on the site."
             href="https://lilocurated.com"
             external
-            frameType="lilo-strip"
+            frameType="iframe"
+            iframeSrc="https://lilocurated.com"
+            iframeDomain="lilocurated.com"
           />
 
         </div>
