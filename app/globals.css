@@ -85,7 +85,7 @@ body {
     color 300ms ease;
 }
 
-/* Shiny metallic gold text fill — matches Lucas's business card foil. */
+/* Shiny metallic gold text fill. Matches Lucas's business card foil. */
 .gold-foil {
   background-image: linear-gradient(
     105deg,
@@ -106,7 +106,7 @@ body {
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
 }
 
-/* Animated sheen variant — use sparingly on the primary wordmark. */
+/* Animated sheen variant. Use sparingly on the primary wordmark. */
 .gold-foil-sheen {
   background-image: linear-gradient(
     105deg,
@@ -128,7 +128,7 @@ body {
   animation: gold-sheen 8s linear infinite;
 }
 
-/* One-shot sheen — replays when the key changes (used for scroll re-entry). */
+/* One-shot sheen. Replays when the key changes (used for scroll re-entry). */
 .gold-foil-sheen-once {
   background-image: linear-gradient(
     105deg,
@@ -158,7 +158,7 @@ body {
   }
 }
 
-/* Primary CTA hover — fills with the foil gradient on hover. */
+/* Primary CTA hover. Fills with the foil gradient on hover. */
 .btn-foil-hover {
   background-image: linear-gradient(
     105deg,
@@ -208,7 +208,7 @@ body {
   z-index: 1;
 }
 
-/* Horizontal foil divider — replaces flat bg-accent rules. */
+/* Horizontal foil divider. Replaces flat bg-accent rules. */
 .gold-foil-divider {
   background-image: linear-gradient(
     90deg,

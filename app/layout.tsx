@@ -56,7 +56,7 @@ const nunitoSans = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Lucas Moraca — Builder",
+  title: "Lucas Moraca, Builder",
   description: "I build products that make brands stand out.",
 };
 

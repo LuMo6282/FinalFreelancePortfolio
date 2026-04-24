@@ -15,7 +15,7 @@ const principles: Principle[] = [
   {
     number: "01",
     title: "Built by hand.",
-    body: "Every piece of your site is written, reviewed, and tested by me — not generated and forgotten. Clean code, zero bloat, and nothing ships until it's right.",
+    body: "Every piece of your site is written, reviewed, and tested by me, not generated and forgotten. Clean code, zero bloat, and nothing ships until it's right.",
     span: "lg:col-span-7",
   },
   {
@@ -33,7 +33,7 @@ const principles: Principle[] = [
   {
     number: "04",
     title: "Built to last.",
-    body: "Every project includes 2 weeks of post-launch support — if anything breaks, I fix it. After that, optional retainer plans keep your site maintained, updated, and running without you thinking about it.",
+    body: "Every project includes 2 weeks of post-launch support. If anything breaks, I fix it. After that, optional retainer plans keep your site maintained, updated, and running without you thinking about it.",
     span: "lg:col-span-7",
   },
 ];

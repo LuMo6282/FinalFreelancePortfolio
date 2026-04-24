@@ -27,7 +27,7 @@ export default function ProjectGrid() {
             </h2>
           </div>
           <p className="max-w-xs font-display text-sm font-light leading-relaxed text-secondary sm:text-right">
-            A mix of products I&apos;ve founded and client work — every tile is
+            A mix of products I&apos;ve founded and client work. Every tile is
             something that went live and stayed live.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function ProjectGrid() {
             title="ChapterMade"
             subtitle="Composite Platform · 22 Chapters · 2,200+ Members"
             techStack={["Next.js", "Tailwind", "Vercel"]}
-            description="End-to-end composite platform for Greek life. Photographers upload shoots to the portal, members log in to purchase individual portraits, executives customize the composite layout, and finished designs ship straight to the framer."
+            description="End-to-end composite platform for Greek life. Executive boards sign up, manage their chapter roster, and customize the composite layout in a guided editor before purchasing composites, photo bundles, and add-ons. Each new member is issued a personal QR code that photographers scan on set, tethering every shot to the right account. Members can buy their own portraits but never see anyone else's. Finished composites export as layered Photoshop templates ready for final retouch and ship straight to the framer."
             href="https://chaptermadecomposites.vercel.app/"
             external
             frameType="iframe"
@@ -53,7 +53,7 @@ export default function ProjectGrid() {
             title="Redline"
             subtitle="AI Training Advisor · React Native · iOS beta"
             techStack={["Next.js", "TypeScript", "Framer Motion"]}
-            description="Programmed AI training advisor for athletes. Reads readiness signals, session history, and goals, then adapts each workout recommendation in real time as you log and recover. Currently in beta testing."
+            description="AI training advisor built into a native mobile app. Pulls live signals from Apple Health and keeps a running memory of each athlete's history, readiness, and goals, so every recommendation reflects the most recent session instead of a static plan. Grounded in a custom-curated database of fitness research and programming logic I assembled for the model to draw from, keeping advice specific and evidence-backed rather than generic. Currently in beta."
             href="https://redline-website-vercel.vercel.app/"
             external
             frameType="iframe"
@@ -67,7 +67,7 @@ export default function ProjectGrid() {
             title="LiLO Curated"
             subtitle="Wholesale Fitness Attire · Shopify · Custom admin"
             techStack={["Next.js", "Tailwind", "Shopify API"]}
-            description="Wholesale storefront for women's premium branded fitness attire. Boutique buyers browse collections and submit custom quote requests, while a bespoke admin dashboard lets the owner field responses and manage every photo, product, and collection on the site."
+            description="Quote-based B2B storefront for a premium women's fitness attire label. Hand-sorted hundreds of product shots into a color-organized catalog, then designed and built the marketing site and wholesale quote flow from scratch. Shipped with a bespoke admin panel that lets the owner edit any page, image, product, or collection, and field every incoming buyer request, without touching code."
             href="https://lilocurated.com"
             external
             frameType="iframe"

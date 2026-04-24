@@ -104,9 +104,8 @@ export default function About() {
               <p className="mt-3 font-display text-base font-light leading-relaxed text-secondary sm:text-[17px]">
                 An AI-powered training app designed and built from scratch.
                 Redline helps hybrid athletes program on the fly, giving the
-                feel of a real athletic coach. Full-stack — React Native
-                frontend, AI coaching system, wearable integration, and Stripe
-                payments.
+                feel of a real athletic coach. Full-stack: React Native
+                frontend, AI coaching system, and Apple Health integration.
               </p>
             </div>
 
@@ -127,7 +126,7 @@ export default function About() {
                 An end-to-end composite business that photographs, retouches,
                 creates, and serves fraternities in the Boulder area. The
                 ChapterMade website handles member photo portals, photographer
-                upload portals, and fraternity exec portals — storing photos,
+                upload portals, and fraternity exec portals, storing photos,
                 compiling composites, and managing communication between users
                 and our company.
               </p>

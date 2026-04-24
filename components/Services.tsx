@@ -20,7 +20,7 @@ const builds: Build[] = [
     tier: 1,
     timeline: "1 week + 1 week support",
     description:
-      "A beautiful single-page site. Your story, your links, your contact info — all in one place. Like a digital business card that actually looks like you.",
+      "A beautiful single-page site. Your story, your links, your contact info, all in one place. Like a digital business card that actually looks like you.",
   },
   {
     name: "The Portfolio",
@@ -28,7 +28,7 @@ const builds: Build[] = [
     tier: 2,
     timeline: "2 weeks + 2 weeks support",
     description:
-      "A multi-page site to showcase your work or services. Includes a contact form. For artists, photographers, freelancers, restaurants — anyone who needs to look great online.",
+      "A multi-page site to showcase your work or services. Includes a contact form. For artists, photographers, freelancers, restaurants, anyone who needs to look great online.",
   },
   {
     name: "The Storefront",
@@ -36,7 +36,7 @@ const builds: Build[] = [
     tier: 3,
     timeline: "3–4 weeks + 4 weeks support",
     description:
-      "A business site that actually takes money. Products, bookings, paid events — powered by Stripe and other trusted payment tools.",
+      "A business site that actually takes money. Products, bookings, paid events, powered by Stripe and other trusted payment tools.",
   },
   {
     name: "The Dashboard",
@@ -44,7 +44,7 @@ const builds: Build[] = [
     tier: 4,
     timeline: "4–8 weeks + 6 weeks support",
     description:
-      "A site where your customers log in and see their own stuff — accounts, profiles, admin tools. For memberships, client portals, internal tools, or early-stage startups.",
+      "A site where your customers log in and see their own stuff: accounts, profiles, admin tools. For memberships, client portals, internal tools, or early-stage startups.",
   },
   {
     name: "The Full Build",
@@ -52,7 +52,7 @@ const builds: Build[] = [
     tier: 5,
     timeline: "Scoped on first call",
     description:
-      "A custom-built web app. You bring the idea, I build the engine. AI features, complex logic, multi-role systems — the ambitious stuff.",
+      "A custom-built web app. You bring the idea, I build the engine. AI features, complex logic, multi-role systems, the ambitious stuff.",
   },
 ];
 
@@ -99,7 +99,7 @@ export default function Services() {
 
         <p className="mt-5 text-center font-display text-base font-light tracking-wide text-secondary">
           Design <span className="text-accent">·</span> Build{" "}
-          <span className="text-accent">·</span> Host — your site, built from
+          <span className="text-accent">·</span> Host. Your site, built from
           scratch around your brand.
         </p>
 
