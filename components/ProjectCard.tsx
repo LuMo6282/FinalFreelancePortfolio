@@ -294,14 +294,14 @@ function RedlineComposite() {
       className="relative w-full"
       style={{
         containerType: "inline-size",
-        aspectRatio: "4 / 5",
+        aspectRatio: "16 / 11",
       }}
     >
       <div
         className="absolute left-0 flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-[#050505] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.7)]"
         style={{
-          top: "8%",
-          width: "86%",
+          top: "0%",
+          width: "82%",
           aspectRatio: "16 / 10",
         }}
       >
@@ -393,9 +393,9 @@ function RedlineComposite() {
         transition={{ duration: 0.6, delay: 1.0, ease }}
         className="absolute overflow-hidden border border-white/10"
         style={{
-          bottom: "3%",
-          right: "3%",
-          width: "32%",
+          bottom: "0%",
+          right: "2%",
+          width: "26%",
           aspectRatio: "9 / 19",
           borderRadius: "clamp(14px, 4cqi, 26px)",
           backgroundColor: "#0a0a0a",
