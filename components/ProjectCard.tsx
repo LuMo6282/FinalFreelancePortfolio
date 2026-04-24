@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import LiLoSlide from "./LiLoSlide";
 
 export type ProjectCardProps = {
   label: string;
@@ -239,76 +240,19 @@ function PhoneFrame({
   );
 }
 
-const LILO_CARD_COLUMNS = [
-  {
-    src: "/assets/lilo/2135.webp",
-    bg: "#c4a882",
-    position: "center top",
-    scale: 1,
-  },
-  {
-    src: "/assets/lilo/DW346.jpg",
-    bg: "#7a8e9b",
-    position: "center",
-    scale: 1.15,
-  },
-  {
-    src: "/assets/lilo/YB45.webp",
-    bg: "#e8e4df",
-    position: "center",
-    scale: 1,
-  },
-  {
-    src: "/assets/lilo/2198.jpg",
-    bg: "#c8c4bf",
-    position: "center",
-    scale: 1,
-  },
-] as const;
-
 function LiLoStripFrame() {
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-edge bg-body/40">
-      <div className="flex items-center gap-1.5 border-b border-edge px-3 py-2">
+      <div className="relative flex items-center gap-1.5 border-b border-edge px-3 py-2">
         <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#28c841]" />
+        <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 truncate font-mono text-[10px] text-secondary">
+          lilocurated.com
+        </span>
       </div>
       <div className="relative aspect-16/10 overflow-hidden">
-        <div className="absolute inset-0 flex">
-          {LILO_CARD_COLUMNS.map((col, i) => (
-            <div
-              key={i}
-              className="relative flex-1 overflow-hidden"
-              style={{ backgroundColor: col.bg }}
-            >
-              <Image
-                src={col.src}
-                alt=""
-                fill
-                sizes="(max-width: 640px) 25vw, 12vw"
-                className="object-cover"
-                style={{
-                  objectPosition: col.position,
-                  ...(col.scale !== 1
-                    ? {
-                        transform: `scale(${col.scale})`,
-                        transformOrigin: "center top",
-                      }
-                    : {}),
-                }}
-              />
-            </div>
-          ))}
-        </div>
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0) 100%)",
-          }}
-        />
+        <LiLoSlide />
       </div>
     </div>
   );

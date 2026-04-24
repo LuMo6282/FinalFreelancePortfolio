@@ -70,9 +70,7 @@ export default function ProjectGrid() {
             description="Quote-based B2B storefront for a premium women's fitness attire label. Hand-sorted hundreds of product shots into a color-organized catalog, then designed and built the marketing site and wholesale quote flow from scratch. Shipped with a bespoke admin panel that lets the owner edit any page, image, product, or collection, and field every incoming buyer request, without touching code."
             href="https://lilocurated.com"
             external
-            frameType="iframe"
-            iframeSrc="https://lilocurated.com"
-            iframeDomain="lilocurated.com"
+            frameType="lilo-strip"
           />
 
         </div>
