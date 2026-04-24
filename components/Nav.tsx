@@ -69,7 +69,7 @@ export default function Nav() {
           type="button"
           onClick={handleLogoClick}
           aria-label="Scroll to top"
-          className="group fixed top-5 left-6 z-50 cursor-pointer font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
+          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 cursor-pointer font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
           <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
           <span className="tracking-tight">LM</span>
@@ -81,7 +81,7 @@ export default function Nav() {
           href="/"
           onClick={onLogoClick}
           aria-label="Home"
-          className="group fixed top-5 left-6 z-50 font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
+          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
           <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
           <span className="tracking-tight">LM</span>
@@ -92,10 +92,10 @@ export default function Nav() {
 
       <nav
         aria-label="Primary"
-        className="fixed top-4 left-1/2 z-50 -translate-x-1/2"
+        className="fixed top-3 right-3 z-50 sm:top-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2"
       >
         <div
-          className={`flex items-center gap-1 rounded-full border px-2 py-1.5 text-primary transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out ${
+          className={`flex items-center gap-0.5 rounded-full border px-1.5 py-1 sm:gap-1 sm:px-2 sm:py-1.5 text-primary transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out ${
             isPastHero
               ? "border-edge bg-body/70 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)] backdrop-blur-md"
               : "border-transparent bg-transparent shadow-none backdrop-blur-none"
@@ -109,7 +109,7 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`relative rounded-full px-3 py-1.5 text-[11px] font-light uppercase tracking-[0.18em] transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current focus:outline-none sm:px-4 sm:text-xs ${
+                className={`relative rounded-full px-2.5 py-1.5 text-[10px] font-light uppercase tracking-[0.16em] transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current focus:outline-none sm:px-4 sm:text-xs sm:tracking-[0.18em] ${
                   showActive ? "opacity-100" : "opacity-70 hover:opacity-100"
                 }`}
               >

@@ -10,13 +10,13 @@ const labelClass =
 export default function Footer() {
   return (
     <footer>
-      <div className="mx-auto max-w-300 px-6 pt-16 pb-8">
+      <div className="mx-auto max-w-300 px-5 pt-12 pb-8 sm:px-6 sm:pt-16">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between sm:gap-16">
           <p className="font-display text-sm font-light text-secondary">
             © 2026 Lucas Moraca
           </p>
 
-          <div className="flex flex-wrap gap-12 sm:gap-16">
+          <div className="flex flex-wrap gap-8 sm:gap-16">
             <div>
               <p className={labelClass}>Elsewhere</p>
               <ul className="space-y-2">

@@ -8,14 +8,14 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function CallToAction() {
   return (
-    <section className="pb-20 sm:pb-28">
-      <div className="mx-auto max-w-300 px-6">
+    <section className="pb-16 sm:pb-28">
+      <div className="mx-auto max-w-300 px-5 sm:px-6">
         <motion.div
           initial={{ y: 32, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease }}
-          className="rounded-card border border-edge bg-surface p-10 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] sm:p-14 lg:p-16"
+          className="rounded-card border border-edge bg-surface p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)] sm:p-10 md:p-14 lg:p-16"
         >
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[2fr_1fr] lg:gap-14">
             <div>
@@ -28,7 +28,7 @@ export default function CallToAction() {
                 aria-hidden="true"
               />
 
-              <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.95] tracking-tight text-primary sm:text-5xl md:text-6xl">
+              <h2 className="mt-6 font-display text-[clamp(1.875rem,8vw,2.5rem)] font-extrabold leading-[0.95] tracking-tight text-primary sm:text-5xl md:text-6xl">
                 Your project, on the next{" "}
                 <span className="gold-foil">grid</span>.
               </h2>

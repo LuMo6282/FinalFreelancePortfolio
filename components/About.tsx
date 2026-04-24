@@ -11,16 +11,16 @@ const linkClass =
 
 export default function About() {
   return (
-    <section id="about" className="py-16 sm:py-24">
-      <div className="mx-auto grid max-w-300 grid-cols-1 items-start gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_1.6fr] lg:gap-20">
+    <section id="about" className="py-12 sm:py-24">
+      <div className="mx-auto grid max-w-300 grid-cols-1 items-start gap-10 px-5 sm:px-6 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_1.6fr] lg:gap-20">
         <motion.div
           initial={{ x: -32, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease }}
-          className="w-full max-w-sm lg:sticky lg:top-28"
+          className="mx-auto w-full max-w-70 sm:max-w-sm lg:sticky lg:top-28 lg:mx-0"
         >
-          <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full bg-surface shadow-[16px_16px_0_0_rgba(255,255,255,0.95)] dark:shadow-[16px_16px_0_0_rgba(0,0,0,0.75)]">
+          <div className="relative aspect-4/5 w-full overflow-hidden rounded-t-full bg-surface shadow-[8px_8px_0_0_rgba(255,255,255,0.95)] dark:shadow-[8px_8px_0_0_rgba(0,0,0,0.75)] sm:shadow-[16px_16px_0_0_rgba(255,255,255,0.95)] sm:dark:shadow-[16px_16px_0_0_rgba(0,0,0,0.75)]">
             {PHOTO_SRC ? (
               <Image
                 src={PHOTO_SRC}
@@ -46,7 +46,7 @@ export default function About() {
           <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
             About
           </p>
-          <h2 className="mt-4 font-serif text-[clamp(2.25rem,11vw,3rem)] italic leading-[1.02] tracking-tight text-primary sm:text-[56px] md:text-[64px]">
+          <h2 className="mt-4 font-serif text-[clamp(2rem,9vw,2.75rem)] italic leading-[1.02] tracking-tight text-primary sm:text-[56px] md:text-[64px]">
             About the builder.
           </h2>
           <p className="mt-3 font-display text-base font-light text-secondary">

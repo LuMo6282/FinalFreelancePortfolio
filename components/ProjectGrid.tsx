@@ -14,14 +14,14 @@ const stats = [
 
 export default function ProjectGrid() {
   return (
-    <section id="work" className="pt-8 pb-20 sm:pt-12 sm:pb-28">
-      <div className="mx-auto max-w-300 px-6">
+    <section id="work" className="pt-6 pb-16 sm:pt-12 sm:pb-28">
+      <div className="mx-auto max-w-300 px-5 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
               Selected Work
             </p>
-            <h2 className="mt-3 max-w-xl font-serif text-3xl italic leading-[1.05] tracking-tight text-primary sm:text-4xl md:text-[44px]">
+            <h2 className="mt-3 max-w-xl font-serif text-[clamp(1.75rem,7vw,2.25rem)] italic leading-[1.05] tracking-tight text-primary sm:text-4xl md:text-[44px]">
               Six years of building for founders,
               <br className="hidden sm:block" /> studios, and small teams.
             </h2>
@@ -76,7 +76,7 @@ export default function ProjectGrid() {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease }}
-          className="mt-16 rounded-card border border-edge bg-surface px-6 py-8 sm:mt-20 sm:px-10 sm:py-10"
+          className="mt-12 rounded-card border border-edge bg-surface px-5 py-7 sm:mt-20 sm:px-10 sm:py-10"
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
             <p className="max-w-xs font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">

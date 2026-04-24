@@ -67,8 +67,8 @@ export default function Services() {
   const prefersReducedMotion = useReducedMotion() ?? false;
 
   return (
-    <section id="services" className="py-24 sm:py-32">
-      <div className="mx-auto max-w-250 px-6">
+    <section id="services" className="py-16 sm:py-24 md:py-32">
+      <div className="mx-auto max-w-250 px-5 sm:px-6">
         <div className="flex items-center justify-center gap-4">
           <div
             className="gold-foil-divider h-px w-12 sm:w-20"
@@ -93,7 +93,7 @@ export default function Services() {
           <span className="ml-0.5 text-accent">·</span>
         </div>
 
-        <h2 className="mt-5 text-center font-serif text-5xl italic leading-[1.05] text-primary sm:text-6xl md:text-7xl">
+        <h2 className="mt-5 text-center font-serif text-[clamp(2.25rem,9vw,3rem)] italic leading-[1.05] text-primary sm:text-6xl md:text-7xl">
           Websites, <span className="gold-foil">built right.</span>
         </h2>
 
@@ -128,12 +128,12 @@ export default function Services() {
                     ? { duration: 0 }
                     : { duration: 0.6, delay: i * 0.07, ease }
                 }
-                className="group relative -mx-4 rounded-2xl px-4 py-8 transition-colors duration-300 ease-out hover:bg-surface-hover sm:-mx-6 sm:px-6 sm:py-10"
+                className="group relative -mx-3 rounded-2xl px-3 py-6 transition-colors duration-300 ease-out hover:bg-surface-hover sm:-mx-6 sm:px-6 sm:py-10"
               >
                 <div className="grid gap-x-10 gap-y-5 md:grid-cols-[2fr_3fr]">
                   <div>
                     <TierDots tier={b.tier} />
-                    <h3 className="mt-4 font-display text-[26px] font-extrabold leading-none tracking-tight text-primary sm:text-[30px]">
+                    <h3 className="mt-4 font-display text-[22px] font-extrabold leading-none tracking-tight text-primary sm:text-[30px]">
                       {b.name}
                     </h3>
                     <AnimatedPrice value={b.price} delay={i * 0.08} />

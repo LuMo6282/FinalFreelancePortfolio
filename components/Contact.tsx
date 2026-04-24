@@ -60,13 +60,13 @@ export default function Contact() {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, ease }}
-        className="mx-auto grid max-w-300 grid-cols-1 gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_1.2fr] lg:gap-20"
+        className="mx-auto grid max-w-300 grid-cols-1 gap-10 px-5 sm:gap-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_1.2fr] lg:gap-20"
       >
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
             Contact
           </p>
-          <h2 className="mt-3 font-display text-4xl font-extrabold leading-none tracking-tight text-primary sm:text-5xl md:text-6xl">
+          <h2 className="mt-3 font-display text-[clamp(2rem,9vw,2.5rem)] font-extrabold leading-[1.02] tracking-tight text-primary sm:text-5xl md:text-6xl">
             Let&apos;s work together.
           </h2>
           <p className="mt-6 max-w-md font-serif text-xl italic text-secondary sm:text-2xl">

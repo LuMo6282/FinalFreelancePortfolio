@@ -28,9 +28,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
-      <div className="mx-auto max-w-300 px-6">
-        <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-8 lg:grid-cols-[9fr_11fr] lg:gap-14 xl:gap-20">
+    <section className="pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
+      <div className="mx-auto max-w-300 px-5 sm:px-6">
+        <div className="grid grid-cols-1 items-center gap-10 sm:gap-14 md:grid-cols-2 md:gap-8 lg:grid-cols-[9fr_11fr] lg:gap-14 xl:gap-20">
           <div>
             <motion.h1
               className="font-display text-[clamp(2rem,10vw,2.75rem)] uppercase leading-[0.95] tracking-wide text-primary sm:text-5xl lg:text-6xl xl:text-7xl"
@@ -75,7 +75,7 @@ export default function Hero() {
             </motion.p>
 
             <motion.div
-              className="mt-8 flex items-center gap-5"
+              className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4"
               initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.75, ease }}

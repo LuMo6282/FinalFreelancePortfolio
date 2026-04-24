@@ -67,7 +67,7 @@ export default function ProjectCard({
       whileHover={{ y: -4 }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className={`card-foil-glow group relative flex cursor-pointer flex-col overflow-hidden rounded-card border border-edge bg-surface p-7 text-primary shadow-[0_8px_30px_-16px_rgba(0,0,0,0.5)] transition-[border-color,background-color,box-shadow] duration-300 hover:border-accent hover:bg-surface-hover hover:shadow-[0_30px_80px_-20px_rgba(201,168,76,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none sm:p-9 ${className}`}
+      className={`card-foil-glow group relative flex cursor-pointer flex-col overflow-hidden rounded-card border border-edge bg-surface p-5 text-primary shadow-[0_8px_30px_-16px_rgba(0,0,0,0.5)] transition-[border-color,background-color,box-shadow] duration-300 hover:border-accent hover:bg-surface-hover hover:shadow-[0_30px_80px_-20px_rgba(201,168,76,0.12)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none sm:p-7 md:p-9 ${className}`}
     >
       <div className="flex flex-col">
         <span className="font-display text-[10px] font-light uppercase tracking-[0.22em] text-secondary sm:text-[11px]">
@@ -76,7 +76,7 @@ export default function ProjectCard({
         <h3 className="mt-3 font-display text-3xl font-extrabold leading-[0.95] tracking-tight text-primary sm:text-4xl md:text-5xl">
           {title}
         </h3>
-        <p className="mt-2 max-w-xs font-display text-sm font-light text-secondary sm:text-base">
+        <p className="mt-2 font-display text-sm font-light text-secondary sm:max-w-xs sm:text-base">
           {subtitle}
         </p>
         {techStack && techStack.length > 0 && (

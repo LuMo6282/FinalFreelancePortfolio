@@ -66,6 +66,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 section[id] {
   scroll-margin-top: 96px;
 }

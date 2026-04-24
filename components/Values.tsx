@@ -40,8 +40,8 @@ const principles: Principle[] = [
 
 export default function Values() {
   return (
-    <section id="how-i-work" className="py-30 sm:py-40">
-      <div className="mx-auto max-w-300 px-6">
+    <section id="how-i-work" className="py-20 sm:py-32 md:py-40">
+      <div className="mx-auto max-w-300 px-5 sm:px-6">
         <div className="flex items-center gap-4">
           <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
             How I Work
@@ -49,7 +49,7 @@ export default function Values() {
           <div className="h-px flex-1 bg-accent/60" aria-hidden="true" />
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-14 sm:mt-20 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-16">
+        <div className="mt-12 grid grid-cols-1 gap-10 sm:mt-20 sm:gap-14 lg:grid-cols-12 lg:gap-x-10 lg:gap-y-16">
           {principles.slice(0, 2).map((p, i) => (
             <PrincipleBlock key={p.number} principle={p} index={i} />
           ))}
@@ -111,7 +111,7 @@ function PrincipleBlock({
       className={principle.span}
     >
       <div className="flex items-baseline gap-4">
-        <p className="gold-foil font-display text-4xl font-extrabold leading-none tracking-tight sm:text-5xl">
+        <p className="gold-foil font-display text-3xl font-extrabold leading-none tracking-tight sm:text-5xl">
           {principle.number}
         </p>
         <span
