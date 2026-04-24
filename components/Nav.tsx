@@ -10,24 +10,24 @@ import ThemeToggle from "./ThemeToggle";
 type NavItem = {
   href: string;
   label: string;
-  match: (pathname: string, hash: string) => boolean;
+  match: (pathname: string) => boolean;
 };
 
 const items: NavItem[] = [
   {
     href: "/",
     label: "Work",
-    match: (p, h) => p === "/" && h !== "#contact",
+    match: (p) => p === "/",
   },
   {
     href: "/about",
     label: "About",
-    match: (p, h) => p.startsWith("/about") && h !== "#contact",
+    match: (p) => p.startsWith("/about"),
   },
   {
-    href: "/about#contact",
-    label: "Contact",
-    match: (_p, h) => h === "#contact",
+    href: "/hire",
+    label: "Hire me",
+    match: (p) => p.startsWith("/hire"),
   },
 ];
 
@@ -35,22 +35,8 @@ export default function Nav() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [scrolledPast, setScrolledPast] = useState(false);
-  const [hash, setHash] = useState("");
   const { onLogoClick, overlay: logoEggOverlay } = useLogoEasterEgg();
   const isPastHero = !isHomePage || scrolledPast;
-
-  useEffect(() => {
-    const syncHash = () => {
-      setHash(window.location.hash);
-    };
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    window.addEventListener("popstate", syncHash);
-    return () => {
-      window.removeEventListener("hashchange", syncHash);
-      window.removeEventListener("popstate", syncHash);
-    };
-  }, []);
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -116,7 +102,7 @@ export default function Nav() {
           }`}
         >
           {items.map((item) => {
-            const isActive = item.match(pathname, hash);
+            const isActive = item.match(pathname);
             const showActive = isActive && isPastHero;
             return (
               <Link

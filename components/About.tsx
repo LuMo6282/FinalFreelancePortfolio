@@ -140,7 +140,7 @@ export default function About() {
           </p>
 
           <p className="mt-8 font-mono text-sm text-secondary">
-            CS @ CU Boulder · CrossFit Coach · 3 products shipped
+            Founded 2 businesses + shipped for clients in fitness, Greek life, and retail
           </p>
 
           <ul className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs">

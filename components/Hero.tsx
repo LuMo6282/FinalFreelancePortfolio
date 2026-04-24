@@ -82,7 +82,7 @@ export default function Hero() {
             >
               <MagneticButton>
                 <Link
-                  href="/about#contact"
+                  href="/hire"
                   className="btn-foil-hover group inline-flex cursor-pointer items-center gap-2 rounded-full px-7 py-3 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-body shadow-[0_0_30px_-8px_rgba(201,168,76,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
                 >
                   <span>Start a project</span>

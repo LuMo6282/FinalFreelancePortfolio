@@ -1,17 +1,17 @@
-import ChapterMarkers from "@/components/ChapterMarkers";
+import CallToAction from "@/components/CallToAction";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import ProjectGrid from "@/components/ProjectGrid";
-import Services from "@/components/Services";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
     <>
-      <ChapterMarkers />
       <main className="flex flex-col">
         <Hero />
         <ProjectGrid />
-        <Services />
+        <Testimonials />
+        <CallToAction />
       </main>
       <Footer />
     </>

@@ -36,8 +36,8 @@ export default function Footer() {
               <p className={labelClass}>Contact</p>
               <ul className="space-y-2">
                 <li>
-                  <a href="/about#contact" className={linkClass}>
-                    Message
+                  <a href="/hire" className={linkClass}>
+                    Hire me
                   </a>
                 </li>
                 <li>

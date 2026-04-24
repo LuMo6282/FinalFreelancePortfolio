@@ -150,7 +150,7 @@ function EasterEggToast() {
       <div className="flex-1 font-display text-sm font-light text-primary">
         <span className="font-serif italic">Nice eye.</span>{" "}
         <Link
-          href="/about#contact"
+          href="/hire"
           className="cursor-pointer font-display text-xs font-extrabold uppercase tracking-[0.18em] text-accent transition-opacity hover:opacity-70"
         >
           Tell me what you&apos;re building →

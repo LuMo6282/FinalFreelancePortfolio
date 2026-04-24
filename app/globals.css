@@ -84,13 +84,13 @@ body {
 .gold-foil {
   background-image: linear-gradient(
     105deg,
-    #8a6d2a 0%,
-    #c9a84c 18%,
-    #f4e4a1 38%,
-    #fff6cf 50%,
-    #f4e4a1 62%,
-    #c9a84c 82%,
-    #7a5f24 100%
+    #6b5220 0%,
+    #b89440 18%,
+    #dcc274 38%,
+    #ecd88f 50%,
+    #dcc274 62%,
+    #b89440 82%,
+    #5c4618 100%
   );
   background-size: 220% 100%;
   background-position: 50% 50%;
@@ -105,13 +105,13 @@ body {
 .gold-foil-sheen {
   background-image: linear-gradient(
     105deg,
-    #8a6d2a 0%,
-    #c9a84c 18%,
-    #f4e4a1 38%,
-    #fff6cf 50%,
-    #f4e4a1 62%,
-    #c9a84c 82%,
-    #7a5f24 100%
+    #6b5220 0%,
+    #b89440 18%,
+    #dcc274 38%,
+    #ecd88f 50%,
+    #dcc274 62%,
+    #b89440 82%,
+    #5c4618 100%
   );
   background-size: 220% 100%;
   background-position: 50% 50%;
@@ -127,13 +127,13 @@ body {
 .gold-foil-sheen-once {
   background-image: linear-gradient(
     105deg,
-    #8a6d2a 0%,
-    #c9a84c 18%,
-    #f4e4a1 38%,
-    #fff6cf 50%,
-    #f4e4a1 62%,
-    #c9a84c 82%,
-    #7a5f24 100%
+    #6b5220 0%,
+    #b89440 18%,
+    #dcc274 38%,
+    #ecd88f 50%,
+    #dcc274 62%,
+    #b89440 82%,
+    #5c4618 100%
   );
   background-size: 220% 100%;
   background-position: 200% 50%;
@@ -157,13 +157,13 @@ body {
 .btn-foil-hover {
   background-image: linear-gradient(
     105deg,
-    #8a6d2a 0%,
-    #c9a84c 18%,
-    #f4e4a1 38%,
-    #fff6cf 50%,
-    #f4e4a1 62%,
-    #c9a84c 82%,
-    #7a5f24 100%
+    #6b5220 0%,
+    #b89440 18%,
+    #dcc274 38%,
+    #ecd88f 50%,
+    #dcc274 62%,
+    #b89440 82%,
+    #5c4618 100%
   );
   background-size: 220% 100%;
   background-position: 85% 50%;
@@ -208,9 +208,9 @@ body {
   background-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(201, 168, 76, 0.3) 15%,
-    #f4e4a1 50%,
-    rgba(201, 168, 76, 0.3) 85%,
+    rgba(184, 148, 64, 0.28) 15%,
+    #dcc274 50%,
+    rgba(184, 148, 64, 0.28) 85%,
     transparent 100%
   );
 }
@@ -219,9 +219,9 @@ body {
 .gold-foil-border-vertical {
   background-image: linear-gradient(
     180deg,
-    rgba(201, 168, 76, 0.15) 0%,
-    #f4e4a1 40%,
-    #c9a84c 60%,
-    rgba(201, 168, 76, 0.15) 100%
+    rgba(184, 148, 64, 0.14) 0%,
+    #dcc274 40%,
+    #b89440 60%,
+    rgba(184, 148, 64, 0.14) 100%
   );
 }

@@ -4,16 +4,12 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type PlaceholderVariant = "redline" | "chaptermade" | "lilo";
-
 type Project = {
-  id: string;
+  id: "redline" | "chaptermade" | "lilo";
   name: string;
   url: string;
   domain: string;
   accent: string;
-  screenshot: string | null;
-  placeholder: PlaceholderVariant;
 };
 
 const PROJECTS: Project[] = [
@@ -23,8 +19,6 @@ const PROJECTS: Project[] = [
     url: "https://redline-website-vercel.vercel.app/",
     domain: "redline-app.com",
     accent: "#00ff88",
-    screenshot: null,
-    placeholder: "redline",
   },
   {
     id: "chaptermade",
@@ -32,8 +26,6 @@ const PROJECTS: Project[] = [
     url: "https://chaptermadecomposites.vercel.app/",
     domain: "chaptermadecomposites.vercel.app",
     accent: "#c9a84c",
-    screenshot: null,
-    placeholder: "chaptermade",
   },
   {
     id: "lilo",
@@ -41,8 +33,6 @@ const PROJECTS: Project[] = [
     url: "https://lilocurated.com",
     domain: "lilocurated.com",
     accent: "#d4a0a0",
-    screenshot: null,
-    placeholder: "lilo",
   },
 ];
 
@@ -56,7 +46,6 @@ export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredDot, setHoveredDot] = useState<number | null>(null);
-  const [visitCounts, setVisitCounts] = useState<Record<string, number>>({});
   const [showHint, setShowHint] = useState(false);
   const interactedRef = useRef(false);
 
@@ -87,24 +76,13 @@ export default function HeroCarousel() {
   const goTo = useCallback(
     (i: number) => {
       dismissHint();
-      setCurrentIndex((prev) => {
-        if (i !== prev) {
-          const id = PROJECTS[i].id;
-          setVisitCounts((v) => ({ ...v, [id]: (v[id] ?? 0) + 1 }));
-        }
-        return i;
-      });
+      setCurrentIndex(i);
     },
     [dismissHint],
   );
 
   const advance = useCallback(() => {
-    setCurrentIndex((prev) => {
-      const next = (prev + 1) % PROJECTS.length;
-      const id = PROJECTS[next].id;
-      setVisitCounts((v) => ({ ...v, [id]: (v[id] ?? 0) + 1 }));
-      return next;
-    });
+    setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
   }, []);
 
   return (
@@ -168,26 +146,13 @@ export default function HeroCarousel() {
               initial={false}
               animate={{ opacity: i === currentIndex ? 1 : 0 }}
               transition={{ duration: 0.7, ease: "easeInOut" }}
-              className="absolute inset-0"
+              className="absolute inset-0 overflow-hidden"
               aria-hidden={i !== currentIndex}
             >
-              {p.screenshot ? (
-                <Image
-                  src={p.screenshot}
-                  alt={`${p.name} site screenshot`}
-                  fill
-                  priority={i === 0}
-                  className="object-cover"
-                  sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 55vw"
-                />
-              ) : p.placeholder === "redline" ? (
-                <RedlineSlide key={`redline-${visitCounts.redline ?? 0}`} />
-              ) : p.placeholder === "chaptermade" ? (
-                <ChapterMadeSlide
-                  key={`chaptermade-${visitCounts.chaptermade ?? 0}`}
-                />
+              {p.id === "lilo" ? (
+                <LiLoSlide />
               ) : (
-                <LiLoSlide key={`lilo-${visitCounts.lilo ?? 0}`} />
+                <ScaledIframe src={p.url} title={`${p.name} live preview`} />
               )}
             </motion.div>
           ))}
@@ -258,452 +223,43 @@ export default function HeroCarousel() {
   );
 }
 
-const EASE_REDLINE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const IFRAME_BASE_WIDTH = 1440;
+const IFRAME_BASE_HEIGHT = 900;
 
-const wordmarkContainerVariants = {
-  hidden: {},
-  visible: {
-    transition: { delayChildren: 0.15, staggerChildren: 0.05 },
-  },
-};
+function ScaledIframe({ src, title }: { src: string; title: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.5);
 
-const wordmarkLetterVariants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.55, ease: EASE_REDLINE },
-  },
-};
-
-function RedlineSlide() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-  const letters = "redline".split("");
-  const r = 30;
-  const circ = 2 * Math.PI * r;
-  const score = 78;
-  const ringOffset = circ - (score / 100) * circ;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      if (w > 0) setScale(w / IFRAME_BASE_WIDTH);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
-    <div
-      className="absolute inset-0 flex items-center gap-5 overflow-hidden px-6 sm:gap-7 sm:px-8 md:gap-8 md:px-10"
-      style={{
-        backgroundColor: "#050505",
-        containerType: "inline-size",
-      }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+    <div ref={ref} className="absolute inset-0 overflow-hidden">
+      <iframe
+        src={src}
+        title={title}
+        loading="lazy"
+        tabIndex={-1}
+        aria-hidden="true"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, rgba(245,241,232,0.6) 0 1px, transparent 1px 3px)",
+          width: IFRAME_BASE_WIDTH,
+          height: IFRAME_BASE_HEIGHT,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
         }}
+        className="pointer-events-none absolute left-0 top-0 block border-0"
       />
-
-      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
-        <motion.h3
-          aria-label="redline"
-          variants={wordmarkContainerVariants}
-          initial={prefersReducedMotion ? "visible" : "hidden"}
-          animate="visible"
-          className="flex items-end text-[#f5f1e8]"
-          style={{
-            fontFamily: "var(--font-redline), system-ui, sans-serif",
-            fontWeight: 800,
-            letterSpacing: "-0.045em",
-            lineHeight: 0.82,
-            fontSize: "clamp(2.25rem, 13cqi, 5.25rem)",
-          }}
-        >
-          {letters.map((ch, i) => (
-            <motion.span
-              key={i}
-              variants={wordmarkLetterVariants}
-              className="inline-block"
-              style={{ willChange: "transform, opacity, filter" }}
-            >
-              {ch}
-            </motion.span>
-          ))}
-        </motion.h3>
-
-        <motion.div
-          aria-hidden
-          initial={
-            prefersReducedMotion
-              ? { scaleX: 1, opacity: 1 }
-              : { scaleX: 0, opacity: 0 }
-          }
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 0.9, ease: EASE_REDLINE, delay: 0.75 }}
-          className="mt-3 h-0.75 origin-left rounded-full"
-          style={{
-            backgroundColor: "#ef2b2d",
-            width: "clamp(140px, 55cqi, 440px)",
-          }}
-        />
-
-        <motion.p
-          initial={
-            prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
-          }
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE_REDLINE, delay: 0.95 }}
-          className="mt-3 font-mono uppercase text-[#7c786c]"
-          style={{
-            fontSize: "clamp(0.55rem, 1.6cqi, 0.8rem)",
-            letterSpacing: "0.22em",
-          }}
-        >
-          AI training advisor
-        </motion.p>
-      </div>
-
-      <motion.div
-        initial={
-          prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }
-        }
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: EASE_REDLINE, delay: 0.45 }}
-        className="relative z-10 shrink-0 overflow-hidden border"
-        style={{
-          height: "78%",
-          aspectRatio: "9 / 19",
-          borderRadius: "clamp(14px, 3.5cqi, 22px)",
-          backgroundColor: "#0a0a0a",
-          borderColor: "rgba(245,241,232,0.06)",
-          boxShadow:
-            "0 24px 50px -24px rgba(22,217,117,0.18), inset 0 0 0 1px rgba(255,255,255,0.03)",
-        }}
-      >
-        <div
-          className="absolute left-1/2 h-0.75 -translate-x-1/2 rounded-full bg-[#111]"
-          style={{ top: "5%", width: "26%" }}
-        />
-
-        <div className="absolute inset-x-[10%] top-[14%] flex flex-col items-center gap-[12%]">
-          <div className="relative w-[78%]" style={{ aspectRatio: "1 / 1" }}>
-            <svg
-              viewBox="0 0 100 100"
-              className="absolute inset-0 h-full w-full -rotate-90"
-            >
-              <circle
-                cx="50"
-                cy="50"
-                r={r}
-                fill="none"
-                stroke="rgba(245,241,232,0.08)"
-                strokeWidth="5.5"
-              />
-              <motion.circle
-                cx="50"
-                cy="50"
-                r={r}
-                fill="none"
-                stroke="#16d975"
-                strokeWidth="5.5"
-                strokeLinecap="round"
-                strokeDasharray={circ}
-                initial={
-                  prefersReducedMotion
-                    ? { strokeDashoffset: ringOffset }
-                    : { strokeDashoffset: circ }
-                }
-                animate={{ strokeDashoffset: ringOffset }}
-                transition={{
-                  duration: 1.3,
-                  ease: EASE_REDLINE,
-                  delay: 0.3,
-                }}
-                style={{ filter: "drop-shadow(0 0 4px rgba(22,217,117,0.5))" }}
-              />
-            </svg>
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4, ease: EASE_REDLINE, delay: 1.0 }}
-              className="absolute inset-0 flex items-center justify-center font-mono text-[#f5f1e8]"
-              style={{
-                fontSize: "clamp(11px, 3.5cqi, 20px)",
-                fontWeight: 700,
-              }}
-            >
-              78
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 6 }
-            }
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: EASE_REDLINE, delay: 1.1 }}
-            className="flex w-full items-center rounded-sm border"
-            style={{
-              gap: "8%",
-              padding: "9% 10%",
-              backgroundColor: "rgba(245,241,232,0.03)",
-              borderColor: "rgba(245,241,232,0.07)",
-            }}
-          >
-            <div className="h-1.25 w-1.25 shrink-0 rounded-full bg-[#16d975]" />
-            <div className="flex min-w-0 flex-1 flex-col gap-0.75">
-              <div className="h-0.75 w-[75%] rounded-full bg-[#a8a396]/40" />
-              <div className="h-0.5 w-[50%] rounded-full bg-[#7c786c]/40" />
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute -inset-3 rounded-[22px]"
-          initial={{ opacity: 0.3 }}
-          animate={
-            prefersReducedMotion
-              ? { opacity: 0.4 }
-              : { opacity: [0.3, 0.6, 0.3] }
-          }
-          transition={
-            prefersReducedMotion
-              ? { duration: 0 }
-              : {
-                  duration: 3,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  delay: 1.5,
-                }
-          }
-          style={{
-            boxShadow: "0 0 50px rgba(22,217,117,0.15)",
-          }}
-        />
-      </motion.div>
     </div>
-  );
-}
-
-const EASE_CHAPTERMADE: [number, number, number, number] = [0, 0, 0.58, 1];
-
-function ChapterMadeSlide() {
-  const prefersReducedMotion = useReducedMotion() ?? false;
-
-  const fadeUp = (delay: number, duration: number, yFrom: number) =>
-    prefersReducedMotion
-      ? {
-          initial: { opacity: 1, y: 0 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0 },
-        }
-      : {
-          initial: { opacity: 0, y: yFrom },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration, delay, ease: EASE_CHAPTERMADE },
-        };
-
-  return (
-    <div
-      className="absolute inset-0 flex flex-col overflow-hidden"
-      style={{
-        containerType: "inline-size",
-        backgroundColor: "#0f0f0f",
-        fontFamily: "var(--font-chaptermade), system-ui, sans-serif",
-      }}
-    >
-      <Image
-        src="/assets/flatirons.jpg"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 55vw"
-        className="object-cover"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(15,15,15,0.45) 40%, rgba(15,15,15,0.9) 100%)",
-        }}
-      />
-
-      <motion.nav
-        {...fadeUp(0.15, 0.4, -20)}
-        className="relative z-10 mx-auto flex w-full items-center justify-between rounded-full border border-white/10 backdrop-blur-md"
-        style={{
-          marginTop: "clamp(10px, 2.5cqi, 22px)",
-          paddingInline: "clamp(10px, 2cqi, 18px)",
-          paddingBlock: "clamp(5px, 1cqi, 8px)",
-          width: "clamp(200px, 70cqi, 520px)",
-          backgroundColor: "rgba(0,0,0,0.35)",
-          fontSize: "clamp(0.5rem, 1.3cqi, 0.75rem)",
-        }}
-      >
-        <div className="flex items-center gap-[6%]">
-          <div
-            className="flex shrink-0 items-center justify-center rounded-[20%] font-bold text-white"
-            style={{
-              width: "clamp(14px, 2.6cqi, 22px)",
-              height: "clamp(14px, 2.6cqi, 22px)",
-              fontSize: "clamp(6px, 1cqi, 10px)",
-              backgroundImage: "linear-gradient(135deg, #c4a574, #d97744)",
-            }}
-          >
-            CM
-          </div>
-          <span
-            className="font-bold tracking-tight text-white"
-            style={{ fontSize: "clamp(0.55rem, 1.4cqi, 0.85rem)" }}
-          >
-            ChapterMade
-          </span>
-        </div>
-        <div
-          className="hidden items-center gap-4 text-white/70 sm:flex"
-          style={{ fontSize: "clamp(0.45rem, 1.1cqi, 0.7rem)" }}
-        >
-          <span>Features</span>
-          <span>How it works</span>
-          <span>Pricing</span>
-        </div>
-      </motion.nav>
-
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
-        <motion.div
-          {...fadeUp(0.35, 0.5, 16)}
-          className="inline-flex items-center rounded-full border border-white/15 bg-white/10 backdrop-blur-sm"
-          style={{
-            gap: "clamp(4px, 1cqi, 8px)",
-            paddingInline: "clamp(8px, 1.8cqi, 16px)",
-            paddingBlock: "clamp(3px, 0.7cqi, 6px)",
-            marginBottom: "clamp(10px, 2.2cqi, 22px)",
-          }}
-        >
-          <StarIcon />
-          <span
-            className="font-medium tracking-wide text-white/90"
-            style={{ fontSize: "clamp(0.45rem, 1.2cqi, 0.7rem)" }}
-          >
-            Trusted by 2,200+ members
-          </span>
-        </motion.div>
-
-        <motion.h3
-          {...fadeUp(0.45, 0.6, 24)}
-          className="font-black tracking-tight text-white"
-          style={{
-            fontWeight: 900,
-            lineHeight: 0.92,
-            letterSpacing: "-0.025em",
-            fontSize: "clamp(1.4rem, 6.5cqi, 3.75rem)",
-          }}
-        >
-          Professional Composites
-          <br />
-          <span
-            className="bg-clip-text text-transparent"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, #d4c4a8, #c4a574, #d97744)",
-              WebkitBackgroundClip: "text",
-            }}
-          >
-            Made Simple
-          </span>
-        </motion.h3>
-
-        <motion.p
-          {...fadeUp(0.6, 0.5, 16)}
-          className="text-white/60"
-          style={{
-            marginTop: "clamp(8px, 1.8cqi, 18px)",
-            maxWidth: "clamp(200px, 56cqi, 420px)",
-            fontSize: "clamp(0.55rem, 1.5cqi, 0.85rem)",
-            lineHeight: 1.55,
-          }}
-        >
-          End-to-end composite management built by Greek life, for Greek life.
-        </motion.p>
-
-        <motion.div
-          {...fadeUp(0.75, 0.5, 16)}
-          className="flex items-center"
-          style={{
-            gap: "clamp(6px, 1.4cqi, 12px)",
-            marginTop: "clamp(10px, 2.2cqi, 22px)",
-          }}
-        >
-          <div
-            className="inline-flex items-center rounded-full font-semibold text-white"
-            style={{
-              gap: "clamp(4px, 0.8cqi, 8px)",
-              paddingInline: "clamp(10px, 2cqi, 18px)",
-              paddingBlock: "clamp(5px, 1.1cqi, 10px)",
-              fontSize: "clamp(0.55rem, 1.4cqi, 0.8rem)",
-              backgroundImage: "linear-gradient(135deg, #c4a574, #d97744)",
-              boxShadow: "0 0 20px rgba(196,165,116,0.3)",
-            }}
-          >
-            Start Your Composite
-            <ArrowRightIcon />
-          </div>
-          <div
-            className="inline-flex items-center rounded-full border border-white/25 font-semibold text-white"
-            style={{
-              paddingInline: "clamp(10px, 2cqi, 18px)",
-              paddingBlock: "clamp(5px, 1.1cqi, 10px)",
-              fontSize: "clamp(0.55rem, 1.4cqi, 0.8rem)",
-            }}
-          >
-            See How It Works
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-function StarIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="#c4a574"
-      stroke="#c4a574"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      style={{
-        width: "clamp(9px, 1.8cqi, 14px)",
-        height: "clamp(9px, 1.8cqi, 14px)",
-      }}
-    >
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      style={{
-        width: "clamp(9px, 1.8cqi, 14px)",
-        height: "clamp(9px, 1.8cqi, 14px)",
-      }}
-    >
-      <line x1="5" y1="12" x2="19" y2="12" />
-      <polyline points="12 5 19 12 12 19" />
-    </svg>
   );
 }
 
