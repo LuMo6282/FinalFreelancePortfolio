@@ -46,7 +46,7 @@ export default function About() {
           <p className="font-display text-[11px] font-light uppercase tracking-[0.22em] text-secondary">
             About
           </p>
-          <h2 className="mt-4 font-serif text-5xl italic leading-[1.02] tracking-tight text-primary sm:text-[56px] md:text-[64px]">
+          <h2 className="mt-4 font-serif text-[clamp(2.25rem,11vw,3rem)] italic leading-[1.02] tracking-tight text-primary sm:text-[56px] md:text-[64px]">
             About the builder.
           </h2>
           <p className="mt-3 font-display text-base font-light text-secondary">

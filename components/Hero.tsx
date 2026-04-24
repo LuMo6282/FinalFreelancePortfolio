@@ -33,7 +33,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-2 md:gap-8 lg:grid-cols-[9fr_11fr] lg:gap-14 xl:gap-20">
           <div>
             <motion.h1
-              className="font-display text-4xl uppercase leading-[0.95] tracking-wide text-primary sm:text-5xl lg:text-6xl xl:text-7xl"
+              className="font-display text-[clamp(2rem,10vw,2.75rem)] uppercase leading-[0.95] tracking-wide text-primary sm:text-5xl lg:text-6xl xl:text-7xl"
               initial={{ y: 32, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0, ease }}
