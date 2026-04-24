@@ -69,38 +69,6 @@ export default function ProjectGrid() {
             frameType="lilo-strip"
           />
 
-          <ProjectCard
-            index={3}
-            label="Client Work"
-            title="Atrium Studio"
-            subtitle="Residential Architecture · Portfolio · Denver"
-            techStack={["Next.js", "Sanity CMS", "Vercel"]}
-            description="Editorial portfolio for a boutique residential architecture firm. Project archive with long-form case studies, custom image-led layout system, and a press kit generator that pulls specs into a downloadable PDF for publications."
-            href="#"
-            frameType="atrium-concept"
-          />
-
-          <ProjectCard
-            index={4}
-            label="Client Work"
-            title="Haven Roasters"
-            subtitle="Specialty Coffee · DTC E-commerce · Subscriptions"
-            techStack={["Shopify Hydrogen", "Klaviyo", "Sanity"]}
-            description="Direct-to-consumer storefront for a single-origin roaster. Subscription management, origin storytelling pages, and a wholesale account portal — all tied to Shopify inventory and a Klaviyo lifecycle flow."
-            href="#"
-            frameType="haven-concept"
-          />
-
-          <ProjectCard
-            index={5}
-            label="Client Work"
-            title="Slate Analytics"
-            subtitle="B2B SaaS · Marketing Site · Seed-stage"
-            techStack={["Next.js", "Framer Motion", "PostHog"]}
-            description="Marketing site, docs, and self-serve trial flow for a team analytics platform. Interactive product demo in the hero, usage-based pricing calculator, and a zero-friction signup that routes to billing after day seven."
-            href="#"
-            frameType="slate-concept"
-          />
         </div>
 
         <motion.div
