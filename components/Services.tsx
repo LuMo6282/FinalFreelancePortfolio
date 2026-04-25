@@ -11,56 +11,111 @@ type Build = {
   tier: number;
   timeline: string;
   description: string;
+  inclusions: string[];
 };
 
 const builds: Build[] = [
   {
     name: "The Card",
-    price: "$500+",
+    price: "$750+",
     tier: 1,
-    timeline: "1 week + 1 week support",
+    timeline: "Ready in 1 week",
     description:
       "A beautiful single-page site. Your story, your links, your contact info, all in one place. Like a digital business card that actually looks like you.",
+    inclusions: [
+      "Custom design from scratch, no template",
+      "Mobile responsive",
+      "Contact form or booking link",
+      "Domain setup",
+      "Basic SEO and analytics",
+      "1 round of revisions",
+    ],
   },
   {
     name: "The Portfolio",
-    price: "$1,200+",
+    price: "$1,500+",
     tier: 2,
-    timeline: "2 weeks + 2 weeks support",
+    timeline: "Ready in 2 weeks",
     description:
       "A multi-page site to showcase your work or services. Includes a contact form. For artists, photographers, freelancers, restaurants, anyone who needs to look great online.",
+    inclusions: [
+      "4 to 6 custom-designed pages",
+      "Mobile responsive",
+      "Contact form, booking integration, or lead capture",
+      "Image galleries or service pages as needed",
+      "SEO and analytics setup",
+      "2 rounds of revisions",
+    ],
   },
   {
     name: "The Storefront",
     price: "$2,500+",
     tier: 3,
-    timeline: "3–4 weeks + 4 weeks support",
+    timeline: "Ready in 2 to 3 weeks",
     description:
-      "A business site that actually takes money. Products, bookings, paid events, powered by Stripe and other trusted payment tools.",
+      "A small e-commerce site that actually sells. For brands with a focused product line. Built on Shopify or with Stripe Checkout, depending on what fits.",
+    inclusions: [
+      "Custom design from scratch",
+      "Up to 25 products configured with variants and imagery",
+      "Payment, shipping, and tax setup",
+      "Mobile responsive",
+      "Cart, checkout, and order management",
+      "Admin training so you can run it yourself",
+      "2 rounds of revisions",
+    ],
+  },
+  {
+    name: "The Brand Storefront",
+    price: "$5,000+",
+    tier: 4,
+    timeline: "Ready in 2 to 3 weeks",
+    description:
+      "A premium e-commerce site for brands ready to compete at the top of their category. Built on Shopify with editorial content, custom design, and a real brand experience. For DTC brands, established businesses, and serious launches.",
+    inclusions: [
+      "Custom design and editorial content sections built around your brand",
+      "100+ product support with bulk management",
+      "Custom product pages, collection pages, and discovery UX",
+      "Mobile-first refinement, micro-interactions, performance tuning",
+      "Email and analytics integration",
+      "Brand portal and supplier integrations as needed",
+      "Admin training and bulk product management setup",
+      "2 rounds of revisions per phase",
+    ],
   },
   {
     name: "The Dashboard",
-    price: "$5,000+",
-    tier: 4,
-    timeline: "4–8 weeks + 6 weeks support",
+    price: "$6,500+",
+    tier: 5,
+    timeline: "Ready in 4 to 8 weeks",
     description:
       "A site where your customers log in and see their own stuff: accounts, profiles, admin tools. For memberships, client portals, internal tools, or early-stage startups.",
+    inclusions: [
+      "Custom design from scratch",
+      "Authentication and user accounts",
+      "Role-based permissions",
+      "Database, admin panel, and API",
+      "Mobile responsive",
+      "Deployment and hosting setup",
+      "2 rounds of revisions per phase",
+    ],
   },
   {
     name: "The Full Build",
     price: "Let's talk",
-    tier: 5,
+    tier: 6,
     timeline: "Scoped on first call",
     description:
       "A custom-built web app. You bring the idea, I build the engine. AI features, complex logic, multi-role systems, the ambitious stuff.",
+    inclusions: [],
   },
 ];
 
 const terms = [
-  "25% deposit to start",
-  "75% on launch",
-  "Infinite revisions to your exact vision",
-  "If my code breaks, I fix it free",
+  "50% deposit to start, 50% on launch",
+  "Two rounds of revisions included per phase, additional revisions billed hourly",
+  "30-day post-launch warranty: if my code breaks, I fix it free",
+  "All projects get a real quote based on actual scope",
+  "You always own your website",
 ];
 
 export default function Services() {
@@ -146,8 +201,23 @@ export default function Services() {
                     <p className="max-w-prose font-display text-sm font-light leading-relaxed text-secondary sm:text-base">
                       {b.description}
                     </p>
-                    <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-secondary/70">
-                      Ready in {b.timeline}
+                    {b.inclusions.length > 0 && (
+                      <ul className="mt-5 max-w-prose space-y-1.5 font-display text-sm font-light leading-relaxed text-secondary/85 sm:text-[15px]">
+                        {b.inclusions.map((item) => (
+                          <li key={item} className="flex gap-2.5">
+                            <span
+                              className="font-mono text-accent/60"
+                              aria-hidden="true"
+                            >
+                              ·
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.2em] text-secondary/70">
+                      {b.timeline}
                     </p>
                   </div>
                 </div>
@@ -201,9 +271,9 @@ function TierDots({ tier }: { tier: number }) {
     <div
       className="flex items-center gap-1.5"
       role="img"
-      aria-label={`Tier ${tier} of 5`}
+      aria-label={`Tier ${tier} of 6`}
     >
-      {Array.from({ length: 5 }, (_, i) => {
+      {Array.from({ length: 6 }, (_, i) => {
         const filled = i < tier;
         return (
           <span

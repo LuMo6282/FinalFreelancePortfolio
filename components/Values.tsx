@@ -27,13 +27,13 @@ const principles: Principle[] = [
   {
     number: "03",
     title: "Ship fast, stay close.",
-    body: "Weekly check-ins, working demos you can explore, and a 3-week average turnaround. You see progress, not silence.",
+    body: "Weekly check-ins, working demos you can explore. Most projects ship in 2 to 4 weeks. You see progress, not silence.",
     span: "lg:col-span-5",
   },
   {
     number: "04",
     title: "Built to last.",
-    body: "Every project includes 2 weeks of post-launch support. If anything breaks, I fix it. After that, optional retainer plans keep your site maintained, updated, and running without you thinking about it.",
+    body: "Every project includes 30 days of post-launch support. If anything breaks, I fix it. After that, optional retainer plans keep your site maintained, updated, and running without you thinking about it.",
     span: "lg:col-span-7",
   },
 ];
