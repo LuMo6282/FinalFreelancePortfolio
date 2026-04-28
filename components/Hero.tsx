@@ -44,7 +44,7 @@ export default function Hero() {
 
   return (
     <>
-      <section className="flex min-h-svh items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 lg:pt-32">
+      <section className="flex min-h-svh items-center pt-16 pb-10 sm:pt-20 sm:pb-12 md:pt-20 lg:pt-24">
         <div className="mx-auto w-full max-w-300 px-5 sm:px-6">
           <div className="flex w-full flex-col items-center gap-10 sm:gap-12">
             <div className="flex max-w-3xl flex-col items-center gap-3 text-center sm:gap-4">
