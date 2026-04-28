@@ -10,7 +10,7 @@ const labelClass =
 export default function Footer() {
   return (
     <footer>
-      <div className="mx-auto max-w-300 px-5 pt-12 pb-8 sm:px-6 sm:pt-16">
+      <div className="mx-auto max-w-300 px-5 pt-4 pb-8 sm:px-6 sm:pt-5">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between sm:gap-16">
           <p className="font-display text-sm font-light text-secondary">
             © 2026 Lucas Moraca
