@@ -53,7 +53,7 @@ export default function ProjectGrid() {
             title="Redline"
             subtitle="AI Training Advisor · React Native · iOS beta"
             techStack={["Next.js", "TypeScript", "Framer Motion"]}
-            description="AI training advisor built into a native mobile app. Pulls live signals from Apple Health and keeps a running memory of each athlete's history, readiness, and goals, so every recommendation reflects the most recent session instead of a static plan. Grounded in a custom-curated database of fitness research and programming logic I assembled for the model to draw from, keeping advice specific and evidence-backed rather than generic. Currently in beta."
+            description="AI training advisor built into a native mobile app. Pulls live signals from Apple Health and keeps a running memory of each athlete's history, readiness, and goals, so every recommendation reflects the most recent session instead of a static plan. Grounded in a custom-curated database of fitness research and programming logic for evidence-backed advice. App is currently in beta testing. Linked is the marketing site to collect emails and advertise the product."
             href="https://redline-website-vercel.vercel.app/"
             external
             frameType="iframe"

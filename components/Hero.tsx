@@ -1,16 +1,31 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import ConfusedVisitor from "./ConfusedVisitor";
 import HeroCarousel from "./HeroCarousel";
 import MagneticButton from "./MagneticButton";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+const SERVICES = [
+  "CRM & customer pipelines",
+  "Email automation",
+  "Ecommerce integrations",
+  "Payment flows",
+  "Booking & scheduling",
+  "Custom admin dashboards",
+  "Workflow automation",
+  "AI integrations",
+  "Internal tools",
+  "Analytics & tracking",
+];
+
 export default function Hero() {
   const [sheenKey, setSheenKey] = useState(0);
   const sheenRef = useRef<HTMLSpanElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const el = sheenRef.current;
@@ -28,64 +43,113 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24">
-      <div className="mx-auto max-w-300 px-5 sm:px-6">
-        <div className="grid grid-cols-1 items-center gap-10 sm:gap-14 md:grid-cols-2 md:gap-8 lg:grid-cols-[9fr_11fr] lg:gap-14 xl:gap-20">
-          <div>
-            <motion.h1
-              className="font-display text-[clamp(2rem,10vw,2.75rem)] uppercase leading-[0.95] tracking-wide text-primary sm:text-5xl lg:text-6xl xl:text-7xl"
-              initial={{ y: 32, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0, ease }}
-            >
-              <span className="font-light">Lucas</span>{" "}
-              <span
-                ref={sheenRef}
-                key={sheenKey}
-                className="gold-foil-sheen-once font-extrabold"
+    <>
+      <section className="flex min-h-svh items-center pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 lg:pt-32">
+        <div className="mx-auto w-full max-w-300 px-5 sm:px-6">
+          <div className="flex w-full flex-col items-center gap-10 sm:gap-12">
+            <div className="flex max-w-3xl flex-col items-center gap-3 text-center sm:gap-4">
+              <motion.p
+                className="font-serif text-lg italic text-secondary sm:text-xl"
+                initial={{ y: 16, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0, ease }}
               >
-                Moraca
-              </span>
-            </motion.h1>
+                Hi, I&apos;m Lucas.
+              </motion.p>
+
+              <motion.h1
+                data-hero-heading
+                className="font-display text-[clamp(1.75rem,7vw,3rem)] font-light leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-6xl"
+                initial={{ y: 32, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.15, ease }}
+              >
+                So you&apos;re shopping for a{" "}
+                <span
+                  ref={sheenRef}
+                  key={sheenKey}
+                  className="gold-foil-sheen-once font-extrabold"
+                >
+                  developer
+                </span>
+                .
+              </motion.h1>
+
+              <motion.p
+                className="font-serif text-lg italic text-secondary sm:text-xl md:text-2xl"
+                initial={{ y: 16, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.4, ease }}
+              >
+                Here&apos;s my work. Let&apos;s see if we&apos;re a fit.
+              </motion.p>
+            </div>
+
+            <HeroCarousel />
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-12 sm:pb-16 md:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-300 px-5 sm:px-6">
+          <motion.div
+            className="mx-auto mb-12 max-w-3xl sm:mb-16 md:mb-20"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-15%" }}
+            transition={{ duration: 0.8, ease }}
+          >
+            <ConfusedVisitor />
+          </motion.div>
+
+          <div className="mx-auto max-w-3xl text-center">
+            <motion.h2
+              className="font-serif text-[clamp(1.75rem,5.5vw,2.5rem)] italic leading-[1.08] tracking-tight text-primary sm:text-[40px] md:text-[48px]"
+              initial={{ y: 16, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.7, ease }}
+            >
+              <span className="gold-foil font-extrabold not-italic">
+                Stop
+              </span>{" "}
+              turning customers and clients away.
+            </motion.h2>
 
             <motion.p
-              className="mt-4 font-display text-xs font-light uppercase tracking-[0.22em] text-secondary sm:text-sm"
+              className="mx-auto mt-3 max-w-xl font-serif text-lg italic text-secondary sm:text-xl"
               initial={{ y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.2, ease }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.7, delay: 0.15, ease }}
             >
-              Freelance Developer &amp; Designer
+              Let&apos;s build something special.
+            </motion.p>
+
+            <motion.p
+              className="mx-auto mt-6 max-w-xl font-display text-base font-light leading-relaxed text-secondary sm:text-lg"
+              initial={{ y: 16, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.7, delay: 0.25, ease }}
+            >
+              We&apos;re entering a new era where the businesses with the least
+              friction win. Let me handle the hard parts. You reap the rewards.
             </motion.p>
 
             <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.45, ease }}
-              className="gold-foil-divider mt-8 h-px w-16 origin-left"
-              aria-hidden="true"
-            />
-
-            <motion.p
-              className="mt-6 max-w-md font-serif text-xl italic text-secondary sm:text-2xl"
+              className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-4"
               initial={{ y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.55, ease }}
-            >
-              Your brand deserves better than a template.
-            </motion.p>
-
-            <motion.div
-              className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-4"
-              initial={{ y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.75, ease }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.7, delay: 0.4, ease }}
             >
               <MagneticButton>
                 <Link
                   href="/hire"
                   className="btn-foil-hover group inline-flex cursor-pointer items-center gap-2 rounded-full px-7 py-3 font-display text-xs font-extrabold uppercase tracking-[0.18em] text-body shadow-[0_0_30px_-8px_rgba(201,168,76,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
                 >
-                  <span>Start a project</span>
+                  <span>Book your project</span>
                   <span
                     aria-hidden="true"
                     className="transition-transform duration-200 ease-out group-hover:translate-x-1"
@@ -94,32 +158,63 @@ export default function Hero() {
                   </span>
                 </Link>
               </MagneticButton>
-
-              <Link
-                href="#work"
-                className="group relative cursor-pointer font-display text-xs font-light uppercase tracking-[0.22em] text-secondary transition-colors duration-200 ease-out hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
-              >
-                <span>See selected work</span>
-                <span
-                  aria-hidden="true"
-                  className="gold-foil-divider absolute -bottom-1 left-0 h-px w-0 transition-[width] duration-200 ease-out group-hover:w-full"
-                />
-              </Link>
             </motion.div>
 
             <motion.p
-              className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary/80"
+              className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-secondary/80"
               initial={{ y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.9, ease }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 0.7, delay: 0.5, ease }}
             >
               Boulder, CO &middot; Available for new projects
             </motion.p>
           </div>
-
-          <HeroCarousel />
         </div>
-      </div>
-    </section>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-15%" }}
+          transition={{ duration: 0.7, delay: 0.4, ease }}
+          className="mt-10 border-y border-edge bg-surface/40"
+          aria-label="Capabilities"
+          role="region"
+        >
+          <div className="marquee-mask overflow-hidden py-4">
+            <motion.div
+              className="flex w-max"
+              animate={prefersReducedMotion ? undefined : { x: ["0%", "-50%"] }}
+              transition={{
+                duration: 55,
+                ease: "linear",
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+            >
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  aria-hidden={copy === 1 ? true : undefined}
+                  className="flex shrink-0 items-center"
+                >
+                  {SERVICES.map((s) => (
+                    <li
+                      key={`${copy}-${s}`}
+                      className="flex items-center font-mono text-[12px] text-secondary"
+                    >
+                      <span className="whitespace-nowrap">{s}</span>
+                      <span aria-hidden className="mx-6 text-accent/60">
+                        &middot;
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+    </>
   );
 }

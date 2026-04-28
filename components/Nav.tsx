@@ -42,9 +42,13 @@ export default function Nav() {
     if (!isHomePage) return;
 
     const onScroll = () => {
-      const y = window.scrollY;
-      const threshold = Math.max(window.innerHeight * 0.6, 400);
-      setScrolledPast(y > threshold);
+      const heading = document.querySelector<HTMLElement>("[data-hero-heading]");
+      if (!heading) {
+        setScrolledPast(window.scrollY > 80);
+        return;
+      }
+      const rect = heading.getBoundingClientRect();
+      setScrolledPast(rect.top < 80);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -69,24 +73,20 @@ export default function Nav() {
           type="button"
           onClick={handleLogoClick}
           aria-label="Scroll to top"
-          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 cursor-pointer font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
+          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 cursor-pointer font-display text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
-          <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
-          <span className="tracking-tight">LM</span>
-          <span className="text-secondary/70 transition-colors group-hover:text-secondary">]</span>
-          <span aria-hidden="true" className="ml-0.5 text-accent">·</span>
+          <span className="font-light">Lucas</span>{" "}
+          <span className="gold-foil font-extrabold">Moraca</span>
         </button>
       ) : (
         <Link
           href="/"
           onClick={onLogoClick}
           aria-label="Home"
-          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 font-mono text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
+          className="group fixed top-4 left-4 z-50 sm:top-5 sm:left-6 font-display text-base text-primary transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
         >
-          <span className="text-secondary/70 transition-colors group-hover:text-secondary">[</span>
-          <span className="tracking-tight">LM</span>
-          <span className="text-secondary/70 transition-colors group-hover:text-secondary">]</span>
-          <span aria-hidden="true" className="ml-0.5 text-accent">·</span>
+          <span className="font-light">Lucas</span>{" "}
+          <span className="gold-foil font-extrabold">Moraca</span>
         </Link>
       )}
 

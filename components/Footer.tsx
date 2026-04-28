@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex items-end justify-end">
+        <div className="mt-6 flex items-end justify-end">
           <span
             className="font-mono text-sm text-secondary"
             aria-hidden="true"
