@@ -64,11 +64,12 @@ export default function About() {
                 I
               </span>
               <span className="sr-only">I</span>
-              {" "}am a developer and designer based out of Boulder. I build
-              websites, apps, and digital products for small businesses and
-              personal brands. I put together everything from the design to the
-              code &amp; deployment. I have a real passion for clean aesthetics
-              and creative designs.
+              &apos;ve been passionate about design since I was a kid. From
+              rearranging my room to making graphics for whatever project I was
+              on, I&apos;ve always gotten lost in creating things that evoke{" "}
+              <em>feel</em> in the observer. I got into designing apps and
+              websites because they&apos;re an open sandbox where truly any
+              vision can be brought to life.
             </p>
             <p className="mt-6">
               Aside from freelancing, I&apos;ve built two businesses:
