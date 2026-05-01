@@ -26,6 +26,8 @@ export default function About() {
                 src={PHOTO_SRC}
                 alt="Lucas Moraca"
                 fill
+                priority
+                fetchPriority="high"
                 className="scale-125 object-cover"
                 sizes="(max-width: 1024px) 100vw, 33vw"
               />
