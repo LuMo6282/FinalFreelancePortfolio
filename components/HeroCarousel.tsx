@@ -1,13 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import LiLoSlide from "./LiLoSlide";
+import ScaledIframe from "./ScaledIframe";
 
 type Project = {
   id: "redline" | "chaptermade" | "lilo";
   name: string;
   url: string;
+  caseStudy?: string;
   domain: string;
   accent: string;
   label: string;
@@ -33,6 +36,7 @@ const PROJECTS: Project[] = [
     id: "chaptermade",
     name: "ChapterMade",
     url: "https://chaptermadecomposites.vercel.app/",
+    caseStudy: "/work/chaptermade",
     domain: "chaptermadecomposites.vercel.app",
     accent: "#c9a84c",
     label: "Founded & Built",
@@ -121,11 +125,15 @@ export default function HeroCarousel() {
     >
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[11fr_9fr] md:gap-10 lg:gap-14">
         <div className="flex flex-col">
-          <a
-            href={currentProject.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${currentProject.name} live site in a new tab`}
+          <Link
+            href={currentProject.caseStudy ?? currentProject.url}
+            target={currentProject.caseStudy ? undefined : "_blank"}
+            rel={currentProject.caseStudy ? undefined : "noopener noreferrer"}
+            aria-label={
+              currentProject.caseStudy
+                ? `Read the ${currentProject.name} case study`
+                : `Open ${currentProject.name} live site in a new tab`
+            }
             style={{ boxShadow: FRAME_SHADOW }}
             className="group relative block w-full overflow-hidden rounded-[14px] bg-surface transition-shadow duration-700 ease-out focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent focus:outline-none"
           >
@@ -178,7 +186,7 @@ export default function HeroCarousel() {
                 </motion.div>
               ))}
             </div>
-          </a>
+          </Link>
 
           <div className="mt-4 flex items-center justify-center gap-1">
             {PROJECTS.map((p, i) => {
@@ -275,42 +283,3 @@ export default function HeroCarousel() {
   );
 }
 
-const IFRAME_BASE_WIDTH = 1440;
-const IFRAME_BASE_HEIGHT = 900;
-
-function ScaledIframe({ src, title }: { src: string; title: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0.5);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const update = () => {
-      const w = el.getBoundingClientRect().width;
-      if (w > 0) setScale(w / IFRAME_BASE_WIDTH);
-    };
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden">
-      <iframe
-        src={src}
-        title={title}
-        loading="lazy"
-        tabIndex={-1}
-        aria-hidden="true"
-        style={{
-          width: IFRAME_BASE_WIDTH,
-          height: IFRAME_BASE_HEIGHT,
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-        }}
-        className="pointer-events-none absolute left-0 top-0 block border-0"
-      />
-    </div>
-  );
-}
