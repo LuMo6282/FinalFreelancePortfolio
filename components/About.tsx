@@ -66,12 +66,12 @@ export default function About() {
                 I
               </span>
               <span className="sr-only">I</span>
-              &apos;ve been passionate about design since I was a kid. From
-              rearranging my room to making graphics for whatever project I was
-              on, I&apos;ve always gotten lost in creating things that evoke{" "}
-              <em>feel</em> in the observer. I got into designing apps and
-              websites because they&apos;re an open sandbox where truly any
-              vision can be brought to life.
+              &apos;ve been into design since I was a kid. Rearranging my room,
+              making graphics for whatever project I was on, getting lost in
+              things that move people. Now I build websites and apps for small
+              businesses and early-stage products. The favorite part is still
+              the same: starting from a blank canvas and ending with something
+              real.
             </p>
             <p className="mt-6">
               Aside from freelancing, I&apos;ve built two businesses:
